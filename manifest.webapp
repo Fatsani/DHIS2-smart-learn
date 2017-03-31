@@ -1,0 +1,21 @@
+{
+    "version": "0.1.1",
+    "name": "Smart-Learn-Course-taker v0.1.1",
+    "description": "Smart-Learn-Course-taker v0.1.1",
+    "launch_path": "index.html",
+    "icons": {
+        "16": "/img/seed-16x16.png",
+        "48": "/img/seed-48x48.png",
+        "128": "/img/seed-128x128.png"
+    },
+    "developer": {
+        "name": "Computer Science Department",
+        "url": "http://www.cs.cc.ac.mw/"
+    },
+    "default_locale": "en",
+    "activities": {
+        "dhis": {
+            "href": "../../.."
+        }
+    }
+}
