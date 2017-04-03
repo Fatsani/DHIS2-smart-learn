@@ -8,11 +8,15 @@ angular.module('listUserCoursesController', [])
    userManager.getUserDetails().then(function(userDetails){
         $scope.username=userDetails.userCredentials.username;
         $scope.userDetails=userDetails;
+        var allScores=[];
         //get user quizes
        quizesManager.getUserQuizes($scope.username).then(function(userQuizes){
              $scope.userQuizes=userQuizes;
-             //console.log($scope.userQuizes);
-         });
+       });
+       //function to get all user scores into an array
+       quizesManager.getAllUserQuizes(allScores).then(function(topThree){
+        $scope.topThree=topThree;
+       });
     });
 
     //get all courses

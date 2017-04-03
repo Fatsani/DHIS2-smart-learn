@@ -22,6 +22,7 @@ angular.module('quizeQuestionsController', [])
      $scope.responseError=quizQuestion;
      //Check if quize is already taken to hide buttons from user quizes
      quizesManager.getUserQuizes($scope.username).then(function(answeredQuizes){
+       $scope.answeredQuizes=answeredQuizes;
      });
      //get all quizes
      quizesManager.getQuizes().then(function(quizes){
@@ -56,15 +57,16 @@ angular.module('quizeQuestionsController', [])
                $scope.quizQuestions=quizQuestion;
         });
          $scope.checkAnswers=function(quizQuestions){
+           console.log(quizQuestions);
+           responseError=[];
+           $scope.errorMessage="";
            if ( quizQuestions.length>0) {
              for (var i = 0; i < quizQuestions.length; i++) {
                for (var y = 0; y < quizQuestions[i].questionAlternatives.length; y++) {
-                 if (quizQuestions[i].value==quizQuestions[i].questionAlternatives[y].alternativeValue) {
-                   if (quizQuestions[i].questionAlternatives[y].alternativeChecked==false) {
+                 if ((quizQuestions[i].value==quizQuestions[i].questionAlternatives[y].alternativeValue || quizQuestions[i].value=="")&&quizQuestions[i].questionAlternatives[y].alternativeChecked==false) {
                      responseError.push(
                       quizQuestions[i].questionID
                      );
-                   }
                  }
                }
              }
@@ -79,14 +81,34 @@ angular.module('quizeQuestionsController', [])
 
          }
          $scope.saveAnswers=function (quizQuestions) {
-           //prepare payload to be saved
-           var  userQuz= '{ "quizes" :[' +
-          '{ "quizID":"'+  $scope.quizeId+'" , "courseID":"'+$scope.courseId+'" }]}';
+           var data={'quizes':[]};
+           data.quizes.push({
+             'courseID':$scope.courseId,
+             'quizID':$scope.quizeId
+           });
+           if ($scope.answeredQuizes.quizes.length>0) {
 
-           quizes = JSON.parse(userQuz);
+             for (var i = 0; i < $scope.answeredQuizes.quizes.length; i++) {
+               if ($scope.quizeId==$scope.answeredQuizes.quizes[i].quizID) {
+                 window.alert("Quiz already taken!");
+               }
+               else {
+                 data.quizes.push({
+                   'courseID':$scope.answeredQuizes.quizes[i].courseID,
+                   'quizID':$scope.answeredQuizes.quizes[i].quizID
+                 });
+               }
 
-           quizesManager.saveCompletedQuiz(quizes,$scope.username).then(function (response) {
+             }
+           }
+
+
+           //console.log(data);
+
+
+          quizesManager.saveCompletedQuiz(data,$scope.username).then(function (response) {
              console.log(response);
+            $location.path("/userCourses");
            })
          }
 

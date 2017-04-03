@@ -2,11 +2,13 @@
   <div ng-include="'views/coursetakerHeader.html'"></div>
   <div class="container">
     <div class="row">
-      <div col-sm-3>
+      <div class="col-sm-3">
         <p>My Score: {{userQuizes.quizes.length}}</p>
       </div>
-      <div col-sm-6 pull-right>
-        <p>Top Three Scores: 1,2,3</p>
+      <div class="col-sm-8 pull-right">
+        <p>Top Three Scores:
+            <div ng-repeat="score in topThree"> {{score}}<span ng-if="score==userQuizes.quizes.length" style="color:green;">*</span></div>
+        </p>
       </div>
     </div>
     <label class="list-group-item-active">Information</label>
