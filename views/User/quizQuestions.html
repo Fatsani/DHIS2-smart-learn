@@ -31,9 +31,17 @@
           </div>
 
           <h5 style="background-color:red;">{{errorMessage}}</h5>
-          <button class="btn btn-success btn-block" ng-click="checkAnswers(quizQuestions)"> Check my answers</button>
+          <div ng-if="buttonActive==0">
+            <button class="btn btn-success btn-block" ng-click="checkAnswers(quizQuestions)"> Check my answers</button>
+          </div>
           <div ng-if="buttonActive==1">
             <button class="btn btn-success btn-block" ng-click="saveAnswers(quizQuestions)">Submit my final answers</button>
+          </div>
+          <div ng-if="buttonActive==2">
+            <button class="btn btn-success btn-block" ng-click="nextQuiz(quizQuestions[0].quizID,courseId)">Next Quiz</button>
+          </div>
+          <div ng-if="buttonActive==3">
+            <button class="btn btn-success btn-block" ng-click="nextCourse(courseId)">Next Course</button>
           </div>
 
         <!--button type="button" id="nextButton" class="btn btn-success btn-block hide" onclick="nextModule(); return false;">Next module</button>';

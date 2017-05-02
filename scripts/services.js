@@ -60,6 +60,7 @@ appSeedServices.factory('quizesManager', function ($http, $q, $location, userMan
           var count=0;
           var deferred = $q.defer();
           function sendToArray(scores,count){
+              
               topScore.push(scores.quizes.length);
               topScore.sort(function (b, a) {
                     return parseFloat(a) - parseFloat(b);
@@ -67,7 +68,6 @@ appSeedServices.factory('quizesManager', function ($http, $q, $location, userMan
                 topScore = topScore.slice(0,3);
                   allArrays.push(topScore);
                   if(typeof allArrays[count]=='undefined'){
-                    console.log(count)
                   }
                   else {
                     deferred.resolve(allArrays[count]);
@@ -76,14 +76,19 @@ appSeedServices.factory('quizesManager', function ($http, $q, $location, userMan
           }
           $http.get(dhis2.settings.baseUrl  +'/../' +'../api/dataStore/coursetaker/')
               .success(function (allQuizes) {
-                var count=0
+                  count=allQuizes.length-1;
                 for (var i = 0; i <allQuizes.length; i++) {
-                  count=i;
+                    if(allQuizes[i]=="mentors"){
+                        count=count-1;
+                    }
+                    else{
                   $http.get(dhis2.settings.baseUrl  +'/../' +'../api/dataStore/coursetaker/'+allQuizes[i])
                       .success(function (scores){
                          sendToArray(scores,count);
 
                       });
+                    }
+                 
                     }
                 });
           return deferred.promise;
@@ -134,4 +139,47 @@ appSeedServices.factory('questionsManager', function ($http, $q, $location, user
         }
     };
     return questionsManager;
+});
+
+//mentors
+appSeedServices.factory('mentorsManager', function ($http, $q, $location, userManager,coursesManager,quizesManager) {
+    var mentorsManager = {
+        //get course
+        getUserCourses: function () {
+            var deferred = $q.defer();
+           $http.get(dhis2.settings.baseUrl  +'/../' +'../api/dataStore/coursetaker/')
+                .success(function (data) {
+                    deferred.resolve(data);
+                }).error(console.log("error"));
+            return deferred.promise;
+        },
+        //get mentors
+        getCourseMentor: function () {
+            var deferred = $q.defer();
+           $http.get(dhis2.settings.baseUrl  +'/../' +'../api/dataStore/coursetaker/mentors')
+                .success(function (data) {
+                    deferred.resolve(data);
+                }).error(console.log("error"));
+            return deferred.promise;
+        },
+        //save mentors for course
+        saveCourseMentor: function (mentorToPost,action) {
+            var deferred = $q.defer();
+           if(action==1){
+            $http.post(dhis2.settings.baseUrl  +'/../' +'../api/dataStore/coursetaker/mentors',mentorToPost)
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+           }
+           else {
+            $http.put(dhis2.settings.baseUrl  +'/../' +'../api/dataStore/coursetaker/mentors',mentorToPost)
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+           }
+           
+            return deferred.promise;
+        }
+    };
+    return mentorsManager;
 });

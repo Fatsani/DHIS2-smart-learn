@@ -29,6 +29,9 @@ var appSeed = angular.module('appSeed',
     }).when('/userCourses/:courseId/Quizes/:quizeId/questions', {
         templateUrl: 'views/User/quizQuestions.html',
         controller: 'quizeQuestionsController'
+    }).when('/userCourses/:courseId/mentors',{
+        templateUrl:'views/User/addMentor.html',
+        controller:'courseMentorsController'
     })
     .otherwise({
         redirectTo : '/'

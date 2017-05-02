@@ -1,0 +1,45 @@
+<div  style="margin:2%">
+  <div ng-include="'views/coursetakerHeader.html'"></div>
+  <div class="container">
+    <div class="row">
+      <div ng-if="showMentors==0">
+        <h2>
+          Did any one helped you (Mentor) when taking this course?
+        </h2>
+        <button class="btn btn-success " ng-click="addMentor(courseId)">Yes </button>
+        <button class="btn btn-primary " ng-click="listCourses()"> No</button>
+      </div>
+      <div ng-if="showMentors==1">
+        <div class="w3-container" style="margin-top: 20px">
+
+        <div class="w3-card-2" style="width: 60%">
+           
+            <table class="w3-table-all w3-hoverable">
+
+                <thead>
+                    <tr>
+                        <th> Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="mentor in mentors">
+                        <td>
+                            {{mentor.mentorName}}
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" ng-click="saveMentor(courseId, mentor.mentorUsername, username)">Add Mentor</a>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+            <br>
+
+        </div>
+    </div>
+      </div>
+    </div>   
+  </div>
+</div>

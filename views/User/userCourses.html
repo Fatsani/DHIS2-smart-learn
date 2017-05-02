@@ -2,38 +2,41 @@
   <div ng-include="'views/coursetakerHeader.html'"></div>
   <div class="container">
     <div class="row">
-      <div class="col-sm-3">
-        <p>My Score: {{userQuizes.quizes.length}}</p>
+      <div class="col-sm-3">    
+        My ({{username}}) Score: {{userQuizes.quizes.length}}
       </div>
       <div class="col-sm-8 pull-right">
-        <p>Top Three Scores:
+        Top Three Scores:
             <div ng-repeat="score in topThree"> {{score}}<span ng-if="score==userQuizes.quizes.length" style="color:green;">*</span></div>
-        </p>
       </div>
     </div>
-    <label class="list-group-item-active">Information</label>
+    <label class="list-group-item-active">Course</label>
     <div ng-repeat="course in allCourses.courses">
-      <ul class="list-group-item">
-         <div class="panel-heading">
-           <h4>{{course.courseTitle }}</h4>
-           <ul class="list-group-item-clearfix">
-             <div ng-repeat="quize in allQuizes.quizes" >
-               <div ng-if="course.courseID==quize.courseID" class="panel panel-default">
-                 <div class="panel-body" ng-click="getQuizeQuestions(quize.quizID,course.courseID)">
-                  {{quize.quizTitle}}
-                  <div ng-repeat="userQuiz in userQuizes.quizes" ng-if="userQuiz.quizID==quize.quizID">
-                    <br>
-                    <div class="label label-success">
-                      Completed
+      <div ng-repeat="attendant in course.courseAttendants">
+        <div ng-if="attendant.attendantUsername==username">
+          <ul class="list-group-item">
+            <div class="panel-heading">
+              <h4>{{course.courseTitle }}</h4>
+              <ul class="list-group-item-clearfix">
+                <div ng-repeat="quize in allQuizes.quizes" >
+                  <div ng-if="course.courseID==quize.courseID" class="panel panel-default">
+                    <div class="panel-body" ng-click="getQuizeQuestions(quize.quizID,course.courseID)">
+                      {{quize.quizTitle}}
+                      <div ng-repeat="userQuiz in userQuizes.quizes" ng-if="userQuiz.quizID==quize.quizID">
+                        <br>
+                        <div class="label label-success">
+                          Completed
+                        </div>
+                      </div>
                     </div>
+                      <br>
                   </div>
                 </div>
-                  <br>
-               </div>
-             </div>
-           </ul>
-         </div>
-      </ul>
+              </ul>
+            </div>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -6,5 +6,6 @@
 var appSeedControllers = angular.module('mainControllers', [
     'listUserCoursesController',
     'UserMainController',
-    'quizeQuestionsController'
+    'quizeQuestionsController',
+    'courseMentorsController'
 ]);
