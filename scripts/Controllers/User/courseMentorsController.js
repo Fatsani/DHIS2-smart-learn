@@ -4,7 +4,7 @@
 
 angular.module('courseMentorsController', [])
 //User main controller
-.controller('courseMentorsController', function ($scope, $window, $timeout, $location, ModalService, $routeParams,userManager,coursesManager,quizesManager,questionsManager,mentorsManager) {
+.controller('courseMentorsController', function ($scope, $window, $timeout, $location, ModalService, $routeParams,userManager,Notification, coursesManager,quizesManager,questionsManager,mentorsManager) {
    $scope.courseId=$routeParams.courseId;
    var mentors=[];
    var mentorToPost={"mentors":[]};
@@ -48,6 +48,7 @@ angular.module('courseMentorsController', [])
                  });
                  mentorsManager.saveCourseMentor(mentorToPost,action).then(function(result){
                 $location.path("/userCourses");
+                Notification.success('Mentor Added Successfully');  
             });
             }
             else{
@@ -61,6 +62,7 @@ angular.module('courseMentorsController', [])
                     });
                      mentorsManager.saveCourseMentor(data,action).then(function(result){
                 $location.path("/userCourses");
+                 Notification.success('Mentor Added Successfully');
                 });
                
             });
@@ -69,5 +71,6 @@ angular.module('courseMentorsController', [])
     }
     $scope.listCourses=function(){
         $location.path("/userCourses");
+         Notification.success('Select Next Course');
     }
 });

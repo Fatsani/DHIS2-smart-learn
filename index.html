@@ -14,14 +14,18 @@
 			dhis2.settings.baseUrl = '../../demo';//For demo "demo.war" instance
 			//dhis2.settings.baseUrl = '../..';//For main "ROOT.war" instance
 		</script>
-        <script type="text/javascript" src="../../../dhis-web-commons/javascripts/jQuery/jquery.min.js"></script>
+        <!--script type="text/javascript" src="../../../dhis-web-commons/javascripts/jQuery/jquery.min.js"></script>
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/jQuery/ui/jquery-ui.min.js"></script>
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/jQuery/jquery.plugin.min.js"></script>
 
-        <script type="text/javascript" src="../../../dhis-web-commons/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../../dhis-web-commons/bootstrap/js/bootstrap.min.js"></script-->
+        <script type="text/javascript" src="scripts/dependances/jquery.js"></script>
+        <script type="text/javascript" src="../../../dhis-web-commons/javascripts/jQuery/ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="scripts/dependances/bootstrap.js"></script>
         <link type="text/css" rel="stylesheet"  href="../../../dhis-web-commons/bootstrap/css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet"  href="scripts/dependances/ui.css">
 
-        <script type="text/javascript" src="../../../dhis-web-commons/javascripts/angular/angular.js"></script>
+        <script type="text/javascript" src="scripts/dependances/angular.js"></script>
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/angular/angular-resource.js"></script>
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/angular/angular-route.js"></script>
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/angular/angular-cookies.js"></script>
@@ -42,11 +46,24 @@
         <script type="text/javascript" src="scripts/controllers.js"></script>
         <script type="text/javascript" src="scripts/filters.js"></script>
 
+        <!--pagination-->
+        <script type="text/javascript" src="node_modules/angular-utils-pagination/dirPagination.js"></script>
+
          <!--Controllers-->      
         <script type="text/javascript" src="scripts/Controllers/User/listUserCoursesController.js"></script>
         <script type="text/javascript" src="scripts/Controllers/User/UserMainController.js"></script>
         <script type="text/javascript" src="scripts/Controllers/User/quizeQuestionsController.js"></script>
         <script type="text/javascript" src="scripts/Controllers/User/courseMentorsController.js"></script>
+
+        <!-- summernote -->
+        <script type="text/javascript" src="summernote/summernote.js"></script>
+        <script type="text/javascript" src="summernote/angular-summernote.js"></script>
+        <link type="text/css" rel="stylesheet" href="summernote/summernote.css"/>
+
+        <!-- notifications -->
+        <script type="text/javascript" src="notification/angular-ui-notification.js"></script>
+        <link type="text/css" rel="stylesheet" href="notification/notify.css">
+
 
         <!-- Menu scripts -->
         <script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.translate.js"></script>
@@ -65,9 +82,21 @@
     </head>
 
     <body>
-    <!--d2-header-bar></d2-header-bar-->
+        
+    <!--d2-header-bar></d2-header-bar>
     <div style="padding-left:5px;padding-right:5px;padding-top:-5px;">
 		<div ng-view></div>
-	</div>
+	</div-->
+   
+        <div class="w3-container " ng-view>
+             
+        </div>
+        
+            <div class="w3-bottom ">
+                <div class="w3-bar w3-blue">
+                    <center><small>Terms and Conditions Apply</small></center>
+
+                </div>
+            </div>
 </body>
 </html>

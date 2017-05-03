@@ -4,7 +4,7 @@
 
 angular.module('quizeQuestionsController', [])
 //User main controller
-.controller('quizeQuestionsController', function ($scope, $window, $timeout, $location, ModalService, $routeParams,userManager,coursesManager,quizesManager,questionsManager) {
+.controller('quizeQuestionsController', function ($scope, $window, $timeout, $location, ModalService, $routeParams,Notification, userManager,coursesManager,quizesManager,questionsManager) {
    userManager.getUserDetails().then(function(userDetails){
      $scope.username=userDetails.userCredentials.username;
      $scope.userDetails=userDetails;
@@ -40,8 +40,16 @@ angular.module('quizeQuestionsController', [])
         for (var i = 0; i < $scope.allQuizes.quizes.length; i++) {
           if ($scope.allQuizes.quizes[i].courseID==$routeParams.courseId) {
             courseQuizes.push($scope.allQuizes.quizes[i].quizID);
+            if($scope.allQuizes.quizes[i].quizID==$scope.quizeId){
+            //  console.log($scope.allQuizes.quizes[i].quizDescription);
+              
+                        var element =angular.element(document.querySelector(".w3-teal"));
+                        console.log(element);
+                        element.append($scope.allQuizes.quizes[i].quizDescription);
+                       
+            }
+            
           }
-          //console.log(JSON.parse($scope.allQuizes.quizes[i].quizDescription));
         }
      });
      //get all courses
@@ -70,6 +78,7 @@ angular.module('quizeQuestionsController', [])
                  }
 
                }
+               
                $scope.quizQuestions=quizQuestion;
         });
          $scope.checkAnswers=function(quizQuestions){
@@ -93,6 +102,7 @@ angular.module('quizeQuestionsController', [])
            else {
              $scope.buttonActive=1;
              $scope.responseError=[];
+               Notification.success('Correct Answer');
            }
 
          }
@@ -125,7 +135,8 @@ angular.module('quizeQuestionsController', [])
              for (var i = 0; i < $scope.answeredQuizes.quizes.length; i++) {
                if ($scope.quizeId==$scope.answeredQuizes.quizes[i].quizID) {
                  window.alert("Quiz already taken!");  
-                 $scope.buttonActive=2;               
+                 $scope.buttonActive=2;
+                 Notification.success('Click Next Quiz');               
                }
                else {
                  data.quizes.push({
@@ -158,9 +169,11 @@ angular.module('quizeQuestionsController', [])
                 }
               }); 
               $scope.buttonActive=2;
+              Notification.success('Click Next Quiz');  
             }
             else{
               $scope.buttonActive=3;
+              Notification.success('Click Next Course');  
             }
             //$location.path("/userCourses");
            })   
@@ -170,6 +183,7 @@ angular.module('quizeQuestionsController', [])
              for(var b = 0; b< userCourseQuizes.length; b++){
                 if(courseQuizes[a]==userCourseQuizes[b]){
                       console.log("already taken");
+                      Notification.success('Quiz already taken');  
                   }
                   else{
                     var quizeId=courseQuizes[a];
@@ -213,6 +227,7 @@ angular.module('quizeQuestionsController', [])
          }
          $scope.nextCourse=function(courseId){
            $location.path("/userCourses/"+courseId+"/mentors");
+           Notification.success('Course successfully completed');  
          }
         });       
     });

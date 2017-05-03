@@ -2,17 +2,24 @@
   <div ng-include="'views/coursetakerHeader.html'"></div>
   <div class="container">
     <div class="row">
-      <div ng-if="showMentors==0">
-        <h2>
-          Did any one helped you (Mentor) when taking this course?
+      <div ng-if="showMentors==0" >
+          <center>
+                <h2>
+          I was helped by someone
         </h2>
-        <button class="btn btn-success " ng-click="addMentor(courseId)">Yes </button>
-        <button class="btn btn-primary " ng-click="listCourses()"> No</button>
+          </center>
+        <br>
+        <button class="btn btn-success btn-block" ng-click="addMentor(courseId)">Yes </button>
+        <br>
+        <button class="btn btn-primary btn-block" ng-click="listCourses()"> No</button>
       </div>
       <div ng-if="showMentors==1">
         <div class="w3-container" style="margin-top: 20px">
 
-        <div class="w3-card-2" style="width: 60%">
+        <div class="w3-card-2">
+            <label class="list-group-item w3-teal" >
+              Select Your Mentor
+            </label>
            
             <table class="w3-table-all w3-hoverable">
 

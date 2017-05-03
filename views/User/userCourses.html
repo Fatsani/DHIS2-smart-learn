@@ -10,13 +10,15 @@
             <div ng-repeat="score in topThree"> {{score}}<span ng-if="score==userQuizes.quizes.length" style="color:green;">*</span></div>
       </div>
     </div>
-    <label class="list-group-item-active">Course</label>
+    <div class="w3-teal"></div>
+    <label class="list-group-item  w3-blue">Courses</label>
     <div ng-repeat="course in allCourses.courses">
       <div ng-repeat="attendant in course.courseAttendants">
         <div ng-if="attendant.attendantUsername==username">
           <ul class="list-group-item">
             <div class="panel-heading">
-              <h4>{{course.courseTitle }}</h4>
+              <h4 class="list-group-item  w3-blue">{{course.courseTitle }}</h4>
+              <br>
               <ul class="list-group-item-clearfix">
                 <div ng-repeat="quize in allQuizes.quizes" >
                   <div ng-if="course.courseID==quize.courseID" class="panel panel-default">
@@ -35,8 +37,11 @@
               </ul>
             </div>
           </ul>
+          <br>
+      <hr>
         </div>
       </div>
+      
     </div>
   </div>
 </div>
